@@ -1,0 +1,106 @@
+syntax="proto3";
+package xiaoyan.protocol;
+
+import "const.proto";
+
+enum EntityBaseType {
+    // note: must match BaseType defined in X-Live/src/zigbee/service/LiveEntity.h
+    BaseTypeUnknown = 0;
+    BaseTypeArea = 1;
+    BaseTypeDevice = 2;
+    BaseTypePeople = 3;
+    BaseTypeSysDescription = 4;
+    BaseTypeFirmware = 5;
+    BaseTypeActionGroup = 6;
+}
+
+enum DeviceType {
+    DeviceUnknown = 0;
+    DeviceLogic = 1;
+    DevicePhysic = 2;
+    DeviceScene = 3;
+    DeviceBinding = 4;
+}
+
+enum DeleteState {
+    InUse = 0;
+    Started = 1;
+    Executing = 2;
+    Completed = 3;
+}
+
+message LiveEntity {
+    EntityBaseType BaseType = 1;
+    string UUID = 2;
+    string Name = 3;
+    string AreaUUID = 4;
+    bool New = 5;
+    DeleteState DeleteState = 6;
+    repeated Attribute Attributes = 7;
+
+    oneof Entity {
+        PhysicDevice EntityDevice = 8;
+        Area EntityArea = 9;
+        Binding EntityBinding = 10;
+        Scene EntityScene = 11;
+        Firmware EntityFirmware = 12;
+        ZigbeeSystem EntityZigbeeSystem = 13;
+    }
+}
+
+message LogicDevice {
+    string UUID = 1;
+    DeviceProfile Profile = 2;
+    string Name = 3;
+    repeated Attribute Attributes = 4;
+    string AreaUUID = 5;
+}
+
+message PhysicDevice {
+    string Model = 1;
+    bool Online = 2;
+    bool Available = 3;
+    repeated LogicDevice LogicDevices = 4;
+
+    int32 UpgradingPercentage = 5;
+    string UpgradingFirmwareUUID = 6;
+    string RecommendFirmwareUUID = 7;
+    int32 RecommendFirmwareVersion = 8;
+    bool IsNew = 9;
+}
+
+message Area {
+}
+
+message Action {
+    string UUID = 1;
+    AttributeID AttrID = 2;
+    int32 AttrValue = 3;
+}
+
+message Binding {
+    BindingType Type = 1;
+    bool Enabled = 2;
+    string TriggerAddress = 3;
+    repeated Action Actions = 4;
+    int32 Parameter = 5;
+}
+
+message ZigbeeSystem {
+    bool Available = 1;
+    uint32 PanId = 2;
+    uint32 Channel = 3;
+    uint32 Version = 4;
+    uint32 PermitJoinDuration = 5;
+}
+
+message Firmware {
+    string SystemUUID = 1;
+    string ImageModel = 2;
+    int32 Version = 3;
+    repeated string SuitableDevices = 4;
+}
+
+message Scene {
+    repeated Action Actions = 1;
+}

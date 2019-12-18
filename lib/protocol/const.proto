@@ -1,0 +1,286 @@
+syntax="proto3";
+package xiaoyan.protocol;
+
+enum EntityType {
+    EntityDevice = 0;
+    EntityScene = 1;
+    EntityArea = 2;
+    EntityBinding = 3;
+    EntitySystem = 4;
+    EntityFirmware = 5;
+}
+
+enum AttributeID {
+    // note: must match attr order defined in X-Live/src/zigbee/consts/attrkeys.cpp
+    AttrIDOnOffStatus = 0;
+    AttrIDTotalPower = 1;
+    AttrIDActivePower = 2;
+    AttrIDInsertExtractStatus = 3;
+    AttrIDOccupancy = 4;
+    AttrIDLuminance = 5;
+    AttrIDTemperature = 6;
+    AttrIDBinInputStatus = 7;
+    AttrIDBatteryPercent = 8;
+    AttrIDFirmwareVersion = 9;
+    AttrIDZBPermitJoin = 10;
+    AttrIDWindowCoveringDirection = 11;
+    AttrIDWindowTargetLiftPercent = 12;
+    AttrIDWindowCurrentLiftPercent = 13;
+    AttrIDSupportOTA = 14;
+    AttrIDAlertLevel = 15;
+    AttrIDWindowCoveringMotorStatus = 16;
+    AttrIDWindowCoveringMotorTripConfigured = 17;
+    AttrIDWindowCoveringUserType = 18;
+    AttrIDWindowCoveringMotorTripAdjusting = 19;
+    AttrIDEntityIsNew = 20;
+    AttrIDDeviceJoinedTime = 21;
+    AttrIDDeviceConnectedTime = 22;
+    AttrIDOccupancyLeft = 23;
+    AttrIDOccupancyRight = 24;
+    AttrIDCfgIndicatorLED = 25;
+    AttrIDCfgDisableRelay = 26;
+    AttrIDCfgButtonBindingType = 27;
+    AttrIDCfgLEDIllumThreshold = 28;
+    AttrIDFirmwareUpgradingVersion = 29;
+    AttrIDFirmwareUpgradingPercent = 30;
+    AttrIDEnableKeepOnOffStatus = 31;
+    AttrIDFirmwareRecommandVersion = 32;
+    AttrIDLastKnobAngle = 33;
+
+}
+
+enum DeviceProfile {
+    // the order must match definitions in X-Live/src/zigbee/service/LogicDevice.h
+    ProfilePIR = 0;
+    SmartPlug = 1;
+    OnOffLight = 2;
+    DoorContact = 3;
+    OnOffSwitch = 4;
+    WindowCovering = 5;
+    YanButton = 6;
+    SmartKnob = 7;
+}
+
+enum BindingType {
+    // must match X-Live/src/zigbee/service/LiveBinding.h
+    Invalid = 0;
+    Keypress = 1;
+    OpenClose = 2;
+    PIR = 3;
+    SmartKnobBinding = 4;
+}
+
+enum SceneStage {
+    // must match X-Live/src/zigbee/xmpp/SceneOnOffTask.cpp
+    INVALIDSTAGE = 0;
+    SceneStarted = 1;
+    SceneFinished = 2;
+}
+
+enum ActionStage {
+    ActionStarted = 0;
+    ActionFinsihed = 1;
+}
+
+enum OnOffCommand {
+    Off = 0;
+    On = 1;
+    Toggle = 2;
+}
+
+enum WindowCoveringMotorStatus {
+    Quiet = 0;
+    Opening = 1;
+    Closing = 2;
+    Setting = 3;
+    Hijacked = 4;
+}
+
+enum WindowCoveringUserType {
+    TypeLeft = 0;
+    TypeRight = 1;
+    TypeBoth = 2;
+}
+
+enum WindowCoveringTripConfigured {
+    Unconfigured = 0;
+    Configured = 1;
+    UnknownStatus = -1;
+}
+
+enum WindowCoveringMotorDirection {
+    DirDefault = 0;
+    DirReverse = 1;
+    DirUnknown = 2;
+}
+
+enum AssociationAction {
+    ActionShare         = 0;
+    ActionRequest       = 1;
+    ActionAccept        = 2;
+    ActionDecline       = 3;
+    ActionApprove       = 4;
+    ActionReject        = 5;
+    ActionCancelShare   = 6;
+    ActionCancelRequest = 7;
+    ActionRemove        = 8;
+}
+
+enum SubscriptionType {
+    Unknown = 0;
+    From = 1;
+    To = 2;
+    Both = 3;
+}
+
+message Attribute {
+    AttributeID AttrID = 1;
+    int32 AttrValue = 2;
+}
+
+enum ErrorCode {
+    EC_OK = 0;
+    EC_BADREQUEST = -1;
+    EC_INVALIDRESPONSE = -2;
+    EC_REQUEST_TIMEOUT = 1;
+    EC_DEVICE_NOT_EXIST = 2;
+    EC_SCENE_NOT_EXIST = 3;
+    EC_SCENE_ALREADY_ON = 4;
+    EC_INVALID_DEVICE_TYPE = 5;
+    EC_INVALID_DEVICE_PROFILE = 6;
+    EC_SCENE_ALREAY_EXIST = 7;
+    EC_SCENE_NOT_TURNED_ON = 8;
+    EC_SCENE_ALREADY_TURNED_ON = 9;
+    EC_SCENE_ALREADY_TURNED_OFF = 10;
+    EC_DEVICE_BINDING_TIMEOUT = 11;
+    EC_BIND_INVALID_DEVICE = 12;
+    EC_BINDING_ALREADY_EXIST = 13;
+    EC_BINDING_NOT_EXIST = 14;
+    EC_DELETE_NON_EXIST_BINDING = 15;
+    EC_BINDING_UPDATE_SAME_SCENE = 16;
+    EC_DEVICE_NOT_ONLINE = 17;
+    EC_FAILED_PARSE_JSON_FILE = 18;
+    EC_INVALID_SCENE_CONFIG_FILE = 19;
+    EC_SCENE_EXEC_ALREADY_FINISHED = 20;
+    EC_SCENE_EXEC_WAITING_FOR_ACK = 21;
+    EC_SCENE_EXEC_TRIED_MAXMUM_TIMES = 22;
+    EC_FAILED_OPEN_CONFIG_DIR = 23;
+    EC_FAILED_FOPEN_FILE = 24;
+    EC_DUPLICATE_AREA_NAME = 25;
+    EC_RENAME_NON_EXISTED_AREA = 26;
+    EC_DELETE_NON_EXISTED_AREA = 27;
+    EC_AREA_NOT_EXIST = 28;
+    EC_DUPLICATE_SCENE_NAME = 29;
+    EC_DEVICE_ALREADY_ADDED = 30;
+    EC_SET_SAME_ALERT_LEVEL = 31;
+    EC_NO_DEVICE_ADDED = 32;
+    EC_GLOBAL_SCENE_ON_RUNING = 33;
+    EC_GLOBAL_SCENE_ALREADY_ON = 34;
+    EC_TOGGLE_GLOBAL_SCENE = 35;
+    EC_SCENE_UPDATE_INVALID_PARAMS = 36;
+    EC_MISSED_PARAMETER = 37;
+    EC_SCENE_IS_NULL = 38;
+    EC_INVALID_PARAMETER = 39;
+    EC_INVALID_COMMAND_PARAM = 40;
+    EC_DEVICE_STATUS_ALREADY_SET = 41;
+    EC_NO_NEED_EXEC_SCENE = 42;
+    EC_NO_NEED_EXEC_ACTION = 43;
+    EC_NO_ACTIONS = 44;
+    EC_NO_VALID_ACTION = 45;
+    EC_ACTION_PARTLY_VALID = 46;
+    EC_INVALID_SCENE = 47;
+    EC_INVALID_ADDRESS = 48;
+    EC_SCENE_CONTAINS_NO_DEVICES = 49;
+    EC_PERMIT_JOIN_ALREADY_DISABLED = 50;
+    EC_PERMIT_JOIN_ALREADY_ENABLED = 51;
+    EC_SAME_REQUEST_ALREADY_STARTED = 52;
+    EC_SCENE_EXECUTION_ALREADY_STARTED = 53;
+    EC_UNKNOWN_PUBSUB_NODE = 54;
+    EC_BINDING_DUPLICATED = 55;
+    EC_BINDING_ALREADY_ENABLED = 56;
+    EC_ASH_RESET_FAILED = 57;
+    EC_NO_ACTION_TO_RUN = 58;
+    EC_SYSTEM_NOT_AVAILABLE = 59;
+    EC_NCP_ERROR_FRAME = 60;
+    EC_NCP_NOT_EXIST = 61;
+    EC_UN_SUPPORTED = 62;
+    EC_ENTITY_NOT_AVAILABLE = 63;
+    EC_ENGINE_DISCONNECTED = 64;
+    EC_FAILED_OPEN_IMAGES_DIR = 65;
+    EC_UPGRADE_ALREADY_IN_PROGRESS = 66;
+    EC_UPGRADE_FAIL_TO_LOCK = 67;
+    EC_UPGRADE_PACKAGE_NOT_FOUND = 68;
+    EC_UPGRADE_PACKAGE_CORRUPTED = 69;
+    EC_UPGRADE_FAIL_TO_ENABLE_RECOVERY = 70;
+    EC_INVALID_OTA_IMAGE_PATH = 71;
+    EC_INVALID_OTA_IMAGE_DATA = 72;
+    EC_SAME_OTA_IMAGE_ALREADY_LOADED = 73;
+    EC_OTA_IMAGE_NOT_EXIST = 74;
+    EC_FIRMWARE_NOT_EXIST = 75;
+    EC_INVALID_OTA_IMAGE_TYPE = 76;
+    EC_NO_DEVICE_MATCHED = 77;
+    EC_OTA_TASK_ALREADY_RUNNING = 78;
+    EC_NO_VALID_OTA_IMAGE = 79;
+    EC_FEATURE_UNSUPPORTED = 80;
+    EC_INCORRECT_FIRMWARE_VERSION = 81;
+    EC_OTA_UPGRADE_END_STATUS_ERROR = 82;
+    EC_OTA_UPGRADE_END_TYPE_ERROR = 83;
+    EC_OTA_UPGRADE_END_MANU_CODE_ERROR = 84;
+    EC_OTA_UPGRADE_END_VERSION_ERROR = 85;
+    EC_OTA_UPGRADE_END_REMAINED_DATA = 86;
+    EC_FEATURE_ATTRIBUTE_READ_ERROR = 87;
+    EC_UNSUPPORTED_ATTR_KEY = 88;
+    EC_ENDPOINT_NOT_EXIST = 89;
+    EC_ENDPOINT_MISSED_ATTR = 90;
+    EC_READ_ATTR_DATA_SIZE_TOO_BIG = 91;
+    EC_READ_ATTR_RESPONSE_ERROR = 92;
+    EC_OTA_IMAGE_DATA_DAMAGED = 93;
+    EC_UNSUPPORTED_READ_ATTR_KEY = 94;
+    EC_OTA_DEVICE_OFFLINE = 95;
+    EC_ENTITY_NOT_EXIST = 96;
+    EC_OTA_START_OFFLINE = 97;
+    EC_DEVICE_UNAVAILABLE = 98;
+    EC_ENTITY_NOT_DEVICE = 99;
+    EC_ENTITY_ALREADY_DELETED = 100;
+    EC_ENTITY_ALREADY_DELETING = 101;
+    EC_DELETE_OFFLINE_DEVICE = 102;
+    EC_TRIED_DELETE_MAX_TIMES = 103;
+    EC_DELETE_ALREADY_SCHEDULED = 104;
+    EC_ON_SCHEDULE_DELETE_TASK = 105;
+    EC_ENTITY_UNDELETABLE_DEVICE = 106;
+    EC_DEVICE_WITHOUT_ON_OFF_FEATURE = 107;
+    EC_OTA_IMAGE_NOTIFY_RESPONE = 108;
+    EC_SYSTEM_UNAVAILABLE = 109;
+    EC_ZB_ENGINE_DISCONNECTED = 110;
+    EC_VD_ENGINE_DISCONNECTED = 111;
+    EC_TARGET_STATUS_CHANGED = 112;
+    EC_ACTION_UNEXECUTABLE = 113;
+    EC_ACTION_TASK_FINISHED = 114;
+    EC_FAILED_TOO_MANY_TIMES = 115;
+    EC_FAST_POLL_TASK_STOPPED = 116;
+    EC_NCP_RESET_FAILURE = 117;
+    EC_ASH_NOT_WORKING = 118;
+    EC_ASH_INVALID_FRAME = 119;
+    EC_NCP_UART_WRITE = 120;
+    EC_INVALID_ASH_CRC = 121;
+    EC_INVALID_ASH_LENGTH = 122;
+    EC_EZSP_INVALID_COMMAND = 123;
+    EC_TASK_FINISHED_DIRECTLY = 124;
+    EC_INVALID_ACTION_GROUP_TYPE = 125;
+    EC_CREATE_NULL_ACTION = 126;
+    EC_UPDATE_BINDING_DEVICE = 127;
+    EC_ENTITY_IS_NULL = 128;
+    EC_CONTAINS_DELETED = 129;
+    EC_ILLEGAL_ARGUMENT = 130;
+    EC_INVALID_TASK_STATE = 131;
+    EC_DEVICE_HAS_GONE = 132;
+    EC_ADJUST_TRIP_FAILED_OPENING = 133;
+    EC_ADJUST_TRIP_FAILED_CLOSING = 134;
+    EC_ADJUST_TRIP_FAILED_SETTING = 135;
+    EC_ADJUST_TRIP_FAILED_TIMEOUT = 136;
+    EC_CONTROL_ON_TRIP_ADJUSTING = 137;
+    EC_TRIP_ADJUSTING_NODE_OFFLINE = 138;
+    EC_VDS_SUBSCRIBE_INDEX_TOO_BIG = 139;
+    EC_ADJUST_TRIP_FAILED_REBOOTING = 140;
+    EC_ADJUST_TRIP_EXPECT_FINISHED = 141;
+}

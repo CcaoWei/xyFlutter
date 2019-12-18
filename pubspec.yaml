@@ -1,0 +1,409 @@
+name: xlive
+description: A new Flutter application.
+version: 2.1.1+330
+
+# 添加的图片要在这里声明一下11！！！！！！！！！
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  dson: any # replace for latest version
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+  uuid: ^1.0.0
+  dio: ^1.0.1
+  protobuf: ^0.13.4
+  http_parser: ">=0.0.1 <4.0.0"
+  shared_preferences: ^0.4.2
+  rxdart: ^0.18.1
+  fluttertoast: ^2.2.2
+  url_launcher: ^3.0.3
+  package_info: ^0.3.2
+  qr_flutter: ^1.1.3
+  image_picker: ^0.4.6
+  connectivity: ^0.3.2
+  # flutter_picker: ^1.0.10
+  # flutter_colorpicker: ^0.2.3
+  flutter_slidable: "^0.4.9"
+
+  #unique_identifier: ^0.0.3
+
+
+  # qrcode:       //
+  #   git:
+  #     url: https://github.com/dsyt/qrcode.git
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: any
+  build_web_compilers: any
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  assets:
+    - images/led_feedback_negative.png
+    - images/led_feedback_positive.png
+    - images/programmable_input_dis.png
+    - images/programmable_input_en.png
+    - images/relay_alwayson_disable.png
+    - images/relay_alwayson_en.png
+    - images/relay_disable.png
+    - images/relay_enable.png
+    - images/inputL.png
+    - images/inputR.png
+    - images/switchmodule_input_mode_button.png
+    - images/switchmodule_input_mode_rocker.png
+    - images/switchmodule_input_polarity_fixed.png
+    - images/switchmodule_input_polarity_toggle.png
+    - images/exclusiveon_state_enable.png
+    - images/exclusiveon_state_disable.png
+    - images/tab_scene.png
+    - images/tab_automation.png
+    - images/tab_automation_active.png
+    - images/tab_scene_active.png
+    - images/tab_device.png
+    - images/tab_device_active.png
+    - images/tab_my.png
+    - images/tab_my_active.png
+    - images/first.png
+    - images/home_center_icon_new.png
+    - images/home_center_icon_offline.png
+    - images/home_center_icon_waiting.png
+    - images/home_center_icon_online.png
+    - images/add_new_home_center.png
+    - images/icon_next.png
+    - images/home_center_selected.png
+    - images/home_center_unselected.png
+    - images/red_point.png
+    - images/home_center_setting_selected.png
+    - images/home_center_setting_unselected.png
+    - images/icon_light_on.png
+    - images/icon_light_off.png
+    - images/icon_light_offline.png
+    - images/icon_plug_on.png
+    - images/icon_plug_off.png
+    - images/icon_plug_offline.png
+    - images/icon_pir.png
+    - images/icon_pir_offline.png
+    - images/icon_dc.png
+    - images/icon_dc_offline.png
+    - images/icon_ws.png
+    - images/icon_ws_offline.png
+    - images/icon_curtain.png
+    - images/icon_offline.png
+    - images/icon_offline_white.png
+    - images/icon_curtain_offline.png
+    - images/binding_alarm.png
+    - images/binding_arrow.png
+    - images/binding_count_down.png
+    - images/binding_curtain.png
+    - images/binding_light.png
+    - images/binding_notification.png
+    - images/binding_open.png
+    - images/binding_plug.png
+    - images/binding_press.png
+    - images/binding_timer.png
+    - images/wall_switch_binding_left_top.png
+    - images/wall_switch_binding_top.png
+    - images/wall_switch_binding_left.png
+    - images/wall_switch_binding_right.png
+    - images/binding_wall_switch_left.png
+    - images/binding_wall_switch_right.png
+    - images/binding_wall_switch_left_top.png
+    - images/binding_wall_switch_top.png
+    - images/icon_ws_lt_on.png
+    - images/icon_ws_lt_off.png
+    - images/icon_ws_lt_offline.png
+    - images/icon_ws_rt_on.png
+    - images/icon_ws_rt_off.png
+    - images/icon_ws_rt_offline.png
+    - images/icon_ws_rb_on.png
+    - images/icon_ws_rb_off.png
+    - images/icon_ws_rb_offline.png
+    - images/icon_ws_lb_on.png
+    - images/icon_ws_lb_off.png
+    - images/icon_ws_lb_offline.png
+    - images/edit_done.png
+    - images/edit_flag.png
+    - images/icon_back.png
+    - images/icon_back_white.png
+    - images/icon_uncheck.png
+    - images/icon_check.png
+    - images/defined.png
+    - images/very_very_light.png
+    - images/light.png
+    - images/little_dark.png
+    - images/very_dark.png
+    - images/icon_help.png
+    - images/picture_light.png
+    - images/picture_plug.png
+    - images/picture_awareness_switch.png
+    - images/picture_door_contact.png
+    - images/picture_wall_switch.png
+    - images/picture_home_center.png
+    - images/picture_curtain.png
+    - images/add_ls_help_01.png
+    - images/add_ls_help_02.png
+    - images/add_ls_help_03.png
+    - images/add_ls_help_04.png
+    - images/add_ls_help_05.png
+    - images/add_ls_help_06.png
+    - images/add_sp_help_01.png
+    - images/add_sp_help_02.png
+    - images/add_sp_help_03.png
+    - images/add_sp_help_04.png
+    - images/add_sp_help_05.png
+    - images/add_as_help_01.png
+    - images/add_as_help_02.png
+    - images/add_as_help_03.png
+    - images/add_as_help_04.png
+    - images/add_as_help_05.png
+    - images/add_as_help_06.png
+    - images/add_dc_help_01.png
+    - images/add_dc_help_02.png
+    - images/add_dc_help_03.png
+    - images/add_dc_help_04.png
+    - images/add_dc_help_05.png
+    - images/add_dc_help_06.png
+    - images/type_left.png
+    - images/type_right.png
+    - images/type_double.png
+    - images/icon_curtain_setting_select.png
+    - images/left_open.png
+    - images/left_closed.png
+    - images/right_open.png
+    - images/right_closed.png
+    - images/double_open.png
+    - images/double_closed.png
+    - images/arrow_left.png
+    - images/arrow_right.png
+    - images/scene_up_on.png
+    - images/scene_up_off.png
+    - images/scene_sleep_on.png
+    - images/scene_sleep_off.png
+    - images/scene_home_on.png
+    - images/scene_home_off.png
+    - images/scene_leave_on.png
+    - images/scene_leave_off.png
+    - images/defined_scene.png
+    - images/defined_scene_on.png
+    - images/delete.png
+    - images/eye_hidden.png
+    - images/eye_shown.png
+    - images/avatar_default.png
+    - images/line.png
+    - images/third_party_qq.png
+    - images/third_party_wechat.png
+    - images/scan_box.png
+    - images/scan_line.png
+    - images/binding_email.png
+    - images/binding_mobile.png
+    - images/binding_qq.png
+    - images/binding_wechat.png
+    - images/big_light_on.png
+    - images/big_light_off.png
+    - images/big_plug_on.png
+    - images/big_plug_off.png
+    - images/plug_in_use_none.png
+    - images/plug_in_use_two.png
+    - images/plug_in_use_three.png
+    - images/icon_power.png
+    - images/image_curtain.png
+    - images/image_wall_switch.png
+    - images/icon_dc_left.png
+    - images/icon_dc_right.png
+    - images/icon_temperature.png
+    - images/icon_luminance.png
+    - images/icon_pir_alarm.png
+    - images/pir_center.png
+    - images/dc_icon_closed_left.png
+    - images/dc_icon_closed_right.png
+    - images/dc_icon_open_left.png
+    - images/dc_icon_open_right.png
+    - images/dc_icon_top.png
+    - images/dc_icon_offline.png
+    - images/binding_wall_switch_key_press.png
+    - images/pir_icon_alarm.png
+    - images/open_close_1.png
+    - images/open_close_2.png
+    - images/pir_panel_1.png
+    - images/pir_panel_2.png
+    - images/pir_panel_3.png
+    - images/pir_binding_device_1.png
+    - images/pir_binding_device_2.png
+    - images/pir_binding_device_3.png
+    - images/pir_binding_curtain_1.png
+    - images/pir_binding_curtain_2.png
+    - images/pir_binding_curtain_3.png
+    - images/ws_binding_device_1.png
+    - images/ws_binding_device_2.png
+    - images/ws_binding_device_3.png
+    - images/ws_binding_curtain_1.png
+    - images/ws_binding_curtain_2.png
+    - images/ws_binding_curtain_3.png
+    - images/home_center.png
+    - images/icon_request.png
+    - images/icon_invitation.png
+    - images/icon_info.png
+    - images/icon_warning.png
+    - images/home.png
+    - images/add.png
+    - images/add_room.png
+    - images/indicate_led_on.png
+    - images/indicate_led_off.png
+    - images/icon_dc_alarm.png
+    - images/recover_relay_on.png
+    - images/recover_relay_off.png
+    - images/tab_scene.png
+    - images/tab_scene_active.png
+    - images/tab_device.png
+    - images/tab_device_active.png
+    - images/tab_my.png
+    - images/tab_my_active.png
+    - images/indicator.png
+    - images/image_smart_dial.png
+    - images/icon_sd_offline.png
+    - images/icon_sd_online.png
+    - images/binding_sd_press.png
+    - images/binding_sd_rotate.png
+    - images/icon_sd_acw.png
+    - images/icon_sd_ccw.png
+    - images/picture_wall_switch_us.png
+    - images/icon_ws_us.png
+    - images/icon_ws_us_offline.png
+    - images/icon_ws_us_m_on.png
+    - images/icon_ws_us_m_off.png
+    - images/icon_ws_us_m_offline.png
+    - images/icon_ws_us_t.png
+    - images/icon_ws_us_m.png
+    - images/icon_ws_us_b.png
+    - images/image_ws_us.png
+    - images/binding_ws_us_top.png
+    - images/binding_ws_us_mid.png
+    - images/binding_ws_us_bot.png
+    - images/binding_ws_us_press.png
+    - images/binding_ws_us_light.png
+    - images/sd_press_device_1.png
+    - images/sd_press_device_2.png
+    - images/sd_press_device_3.png
+    - images/sd_press_curtain_1.png
+    - images/sd_press_curtain_2.png
+    - images/sd_press_curtain_3.png
+    - images/ws_us_press_device_1.png
+    - images/ws_us_press_device_2.png
+    - images/ws_us_press_device_3.png
+    - images/ws_us_press_curtain_1.png
+    - images/ws_us_press_curtain_2.png
+    - images/ws_us_press_curtain_3.png
+    - images/sd_rotate_1.png
+    - images/sd_rotate_2.png
+    - images/binding_sd_press_2.png
+    - images/no_device.png
+    - images/arrow.png
+    - images/hk_tab_home.png
+    - images/hk_tab_home_active.png
+    - images/hk_tab_device.png
+    - images/hk_tab_device_active.png
+    - images/hk_tab_scene.png
+    - images/hk_tab_scene_active.png
+    - images/hk_tab_about.png
+    - images/hk_tab_about_active.png
+    - images/hk_home.png
+    - images/hk_home_white.png
+    - images/hk_leave.png
+    - images/hk_leave_white.png
+    - images/hk_get_up.png
+    - images/hk_get_up_white.png
+    - images/hk_sleep.png
+    - images/hk_sleep_white.png
+    - images/hk_defined.png
+    - images/hk_defined_white.png
+    - images/hk_room.png
+    - images/picture_switch_module.png
+    - images/image_switch_module.png
+    - images/icon_switch_module.png
+    - images/icon_switch_module_offline.png
+    - images/auto_time_table.png
+    - images/auto_timer.png
+    - images/auto_condition.png
+    - images/auto_device.png
+    - images/automation_pir.png
+    - images/automation_door_sensor.png
+    - images/automation_plug.png
+    - images/automation_light_socket.png
+    - images/automation_curtain.png
+    - images/automation_smart_dial.png
+    - images/automation_wall_switch.png
+    - images/icon_sm_output1.png
+    - images/icon_sm_output2.png
+    - images/icon_sm_out_offline.png
+    - images/dotted.png
+    - images/timer_oval.png
+    - images/auto_light_time.png
+    - images/color_temperature_select.png
+    - images/select_dot.png
+    - images/timer_bg.png
+    - images/automation_switch_module.png
+    - images/cond_icon_sm_output2.png
+    - images/cond_icon_sm_input1.png
+    - images/cond_icon_sm_input2.png
+    - images/cond_icon_sm_output1.png
+    - images/icon_uncheck_scene.png
+    - images/auto_list_null.png
+    - images/box_old.png
+    - images/channel_wraing.png
+    - images/new_device_air_conditioner.png
+    - images/dev_icon_air_condition_controller_on.png
+    - images/dev_icon_air_conditioner_on.png
+    - images/dev_icon_air_conditioner_off.png
+    - images/image_air_condition.png
+    - images/icon_mode_hot.png
+    - images/icon_mode_flow.png
+    - images/icon_mode_demoisture.png
+    - images/icon_mode_cool.png
+    - images/icon_flow.png
+    - images/image_air_condition_controller.png
+    - images/dev_icon_air_condition_controller_off.png
+    - images/new_device_rotary_knob.png
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #  - images/a_dot_burr.jpeg
+  #  - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.io/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.io/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.io/custom-fonts/#from-packages

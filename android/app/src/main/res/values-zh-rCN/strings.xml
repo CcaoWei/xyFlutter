@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scan_code">扫描二维码</string>
+    <string name="scan_code_request">请将家庭中心底部的二维码放入框内</string>
+    <string name="scan_code_share">请将要分享用户的二维码放入框内</string>
+
+    <string name="app_name">小燕在家</string>
+</resources>

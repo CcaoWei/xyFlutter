@@ -1,0 +1,5 @@
+the source code in dialog.dart was modified.
+
+line 77: const Color _kDialogPressedColor = Color(0xFFD4D4D4);//Color(0x90FFFFFF);
+
+line 82: const Color _kButtonDividerColor = Color(0xFFD4D4D4);//Color(0x40FFFFFF);

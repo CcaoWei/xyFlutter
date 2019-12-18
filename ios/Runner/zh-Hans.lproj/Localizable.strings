@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Runner
+
+  Created by litao on 2019/1/2.
+  Copyright © 2019年 The Chromium Authors. All rights reserved.
+*/
+
+"No access to camera" = "此应用无访问相机权限";

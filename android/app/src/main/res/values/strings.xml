@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scan_code">Scan QR Code</string>
+    <string name="scan_code_request">Scan the QR code on bottom of Home Center</string>
+    <string name="scan_code_share">Scan the QR code of other user</string>
+
+    <string name="app_name">Xiaoyan Home</string>
+</resources>

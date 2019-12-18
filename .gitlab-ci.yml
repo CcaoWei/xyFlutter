@@ -1,0 +1,19 @@
+variables:
+    REPO_PATH: gitlab.com/$CI_PROJECT_PATH
+
+stages:
+- test
+
+all_tests:
+    image: rxwen/flutter-sdk
+    script:
+        - pushd /flutter
+        - git apply $CI_PROJECT_DIR/flutter_sdk_modification.patch
+        - popd
+        - pwd
+        - git log -1 --oneline
+        - flutter --version
+        - flutter packages get
+        - make lint
+        - make checkformat
+        - flutter test

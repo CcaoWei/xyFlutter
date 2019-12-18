@@ -1,0 +1,320 @@
+syntax="proto3";
+package xiaoyan.protocol;
+
+import "entity.proto";
+import "const.proto";
+import "google/protobuf/timestamp.proto";
+
+message Message {
+    string MessageID = 1;
+    string CorrelationID = 2;
+    string Sender = 3;
+    google.protobuf.Timestamp Time = 4;
+
+    oneof Body {
+        ErrorResponse Error = 10;
+        OnOffRequest OnOff = 11;
+        OnOffResponse OnOffResult = 12;
+        GetEntityRequest GetEntity = 13;
+        GetEntityResponse GetEntityResult = 14;
+        CreateSceneRequest CreateScene = 15;
+        CreateSceneResponse CreateSceneResult = 16;
+        UpdateSceneRequest UpdateScene = 17;
+        UpdateSceneResponse UpdateSceneResult = 18;
+        DeleteSceneRequest DeleteScene = 19;
+        DeleteSceneResponse DeleteSceneResult = 20;
+        SetSceneOnOffRequest SetSceneOnOff = 21;
+        SetSceneOnOffResponse SetSceneOnOffResult = 22;
+        CreateBindingRequest CreateBinding = 23;
+        CreateBindingResponse CreateBindingResult = 24;
+        UpdateBindingRequest UpdateBinding = 25;
+        UpdateBindingResponse UpdateBindingResult = 26;
+        DeleteBindingRequest DeleteBinding = 27;
+        DeleteBindingResponse DeleteBindingResult = 28;
+        SetBindingEnableRequest SetBindingEnable = 29;
+        SetBindingEnableResponse SetBindingEnableResult = 30;
+        ConfigEntityInfoRequest ConfigEntityInfo = 31;
+        ConfigEntityInfoResponse ConfigEntityInfoResult = 32;
+        CreateAreaRequest CreateArea = 33;
+        CreateAreaResponse CreateAreaResult = 34;
+        DeleteAreaRequest DeleteArea = 35;
+        DeleteAreaResponse DeleteAreaResult = 36;
+        SetPermitJoinRequest SetPermitJoin = 37;
+        SetPermitJoinResponse SetPermitJoinResult = 38;
+        SetAlertLevelRequest SetAlertLevel = 39;
+        SetAlertLevelResponse SetAlertLevelResult = 40;
+        ReadAttributeRequest ReadAttribute = 41;
+        ReadAttributeResponse ReadAttributeResult = 42;
+        FirmwareUpgradeRequest FirmwareUpgrade = 43;
+        FirmwareUpgradeResponse FirmwareUpgradeResult = 44;
+        IdentifyDeviceRequest IdentifyDevice = 45;
+        IdentifyDeviceResponse IdentifyDeviceResult = 46;
+        DeleteEntityRequest DeleteEntity = 47;
+        DeleteEntityResponse DeleteEntityResult = 48;
+        ControlWindowCoveringRequest ControlWindowCovering = 49;
+        ControlWindowCoveringResponse ControlWindowCoveringResult = 50;
+        GetTimeRequest GetTime = 51;
+        GetTimeResponse GetTimeResult = 52;
+        SetTimeRequest SetTime = 53;
+        SetTimeResponse SetTimeResult = 54;
+        DeviceAssociationNotification DeviceAssociation = 55;
+        CheckNewVersionRequest CheckNewVersion = 56;
+        SetUpgradePolicyRequest SetUpgradePolicy = 57;
+        SetUpgradePolicyResponse SetUpgradePolicyResult = 58;
+        GetUpgradePolicyRequest GetUpgradePolicy = 59;
+        GetUpgradePolicyResponse GetUpgradePolicyResult = 60;
+        GetHomeKitSettingRequest GetHomeKitSetting = 61;
+        GetHomeKitSettingResponse GetHomeKitSettingResult = 62;
+        WriteAttributeRequest WriteAttribute = 63;
+        WriteAttributeResponse WriteAttributeResult = 64;
+        CheckNewVersionResponse CheckNewVersionResult = 65;
+    }
+}
+
+message ErrorResponse {
+    ErrorCode Code = 1;
+    string Description = 2;
+}
+
+message OnOffRequest {
+    string UUID = 1;
+    OnOffCommand Command = 2;
+}
+
+message OnOffResponse {
+    bool Status = 1;
+}
+
+message GetEntityRequest {
+    EntityType Type = 1;
+    uint32 Commit = 2;
+    uint32 Count = 3;
+    uint32 Index = 4;
+}
+
+message GetEntityResponse {
+    repeated LiveEntity Entities = 1;
+    uint32 CountRemaining = 2;
+}
+
+message CreateSceneRequest {
+    LiveEntity Scene = 1;
+}
+
+message CreateSceneResponse {
+    string UUID = 1;
+}
+
+message UpdateSceneRequest {
+    LiveEntity Scene = 1;
+}
+
+message UpdateSceneResponse {
+    string UUID = 1;
+    bool OnOff = 2;
+}
+
+message DeleteSceneRequest {
+    string UUID = 1;
+}
+
+message DeleteSceneResponse {
+    string UUID = 1;
+}
+
+message SetSceneOnOffRequest {
+    string UUID = 1;
+    OnOffCommand Command = 2;
+}
+
+message SetSceneOnOffResponse {
+    string UUID = 1;
+    bool OnOff = 2;
+    SceneStage Stage = 3;
+}
+
+message CreateBindingRequest {
+    LiveEntity Binding = 1;
+}
+
+message CreateBindingResponse {
+    string UUID = 1;
+}
+
+message UpdateBindingRequest {
+    LiveEntity Binding = 1;
+}
+
+message UpdateBindingResponse {
+    string UUID = 1;
+}
+
+message DeleteBindingRequest {
+    string UUID = 1;
+}
+
+message DeleteBindingResponse {
+    string UUID = 1;
+}
+
+message SetBindingEnableRequest {
+    string UUID = 1;
+    bool Enabled = 2;
+}
+
+message SetBindingEnableResponse {
+}
+
+message ConfigEntityInfoRequest {
+    string UUID = 1;
+    string Name = 2;
+    string AreaUUID = 3;
+}
+
+message ConfigEntityInfoResponse {
+    bool IsNew = 1;
+}
+
+message CreateAreaRequest {
+    string Name = 1;
+}
+
+message CreateAreaResponse {
+    string UUID = 1;
+}
+
+message DeleteAreaRequest {
+    string UUID = 1;
+}
+
+message DeleteAreaResponse {
+    string UUID = 1;
+}
+
+message SetPermitJoinRequest {
+    string UUID = 1;
+    uint32 Duration = 2;
+}
+
+message SetPermitJoinResponse {
+    uint32 Duration = 1;
+}
+
+message SetAlertLevelRequest {
+    string UUID = 1;
+    uint32 Level = 2;
+}
+
+message SetAlertLevelResponse {
+    uint32 Level = 1;
+}
+
+message ReadAttributeRequest {
+    string UUID = 1;
+    AttributeID AttrID = 2;
+    bool Realtime = 3;
+    int32 TimeoutMS = 4;
+}
+
+message ReadAttributeResponse {
+    int32 Code = 1;
+    int32 Value = 2;
+}
+
+message WriteAttributeRequest {
+    string UUID = 1;
+    AttributeID AttrID = 2;
+    int32 Value = 3;
+}
+
+message WriteAttributeResponse {
+    int32 Code = 1;
+}
+
+message FirmwareUpgradeRequest {
+    string FirmwareUUID = 1;
+    string Devices = 2;
+}
+
+message FirmwareUpgradeResponse {
+}
+
+message IdentifyDeviceRequest {
+    string UUID = 1;
+    int32 Duration = 2;
+}
+
+message IdentifyDeviceResponse {
+}
+
+message DeleteEntityRequest {
+    string UUID = 1;
+}
+
+message DeleteEntityResponse {
+}
+
+message ControlWindowCoveringRequest {
+    string UUID = 1;
+    uint32 Percent = 2;
+}
+
+message ControlWindowCoveringResponse {
+}
+
+message GetTimeRequest {
+    string UUID = 1;
+}
+
+message GetTimeResponse {
+    string Time = 1;
+    string TimeZone = 2;
+}
+
+message SetTimeRequest {
+    string Time = 1;
+    string TimeZone = 2;
+}
+
+message SetTimeResponse {
+}
+
+message DeviceAssociationNotification {
+    string User = 1;
+    string By = 2;
+    string DeviceName = 3;
+    string DeviceUUID = 4;
+    AssociationAction Action = 5;
+    SubscriptionType Status = 6;
+    string UserDisplayName = 7;
+    string ByDisplayName = 8;
+}
+
+message CheckNewVersionRequest {
+}
+
+message CheckNewVersionResponse {
+}
+
+message SetUpgradePolicyRequest {
+    string Channel = 1;
+    uint32 Interval = 2;
+}
+
+message SetUpgradePolicyResponse {
+}
+
+message GetUpgradePolicyRequest {
+}
+
+message GetUpgradePolicyResponse {
+    string Channel = 1;
+    uint32 Interval = 2;
+}
+
+message GetHomeKitSettingRequest {
+}
+
+message GetHomeKitSettingResponse {
+    string SetupCode = 1;
+}

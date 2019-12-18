@@ -1,0 +1,198 @@
+syntax="proto3";
+package xiaoyan.protocol;
+
+import "const.proto";
+import "entity.proto";
+import "google/protobuf/timestamp.proto";
+
+message Event {
+    string MessageID = 1;
+    string Sender = 2;
+    google.protobuf.Timestamp Time = 3;
+
+    oneof Body {
+        EntityAvailableEvent EntityAvailable = 4;
+        PhysicDeviceOnlineEvent PhysicDeviceOnline = 5;
+        PhysicDeviceOfflineEvent PhysicDeviceOffline = 6;
+        DeviceKeyPressedEvent DeviceKeyPressed = 7;
+        DeviceAttrReportEvent DeviceAttrReport = 8;
+        OnOffStatusChangedEvent OnOffStatusChanged = 9;
+        SceneCreatedEvent SceneCreated = 10;
+        SceneUpdatedEvent SceneUpdated = 11;
+        SceneDeletedEvent SceneDeleted = 12;
+        BindingCreatedEvent BindingCreated = 13;
+        BindingUpdatedEvent BindingUpdated = 14;
+        BindingDeletedEvent BindingDeleted = 15;
+        EntityInfoConfiguredEvent EntityInfoConfigured = 16;
+        AreaCreatedEvent AreaCreated = 17;
+        AreaRenamedEvent AreaRenamed = 18;
+        AreaDeletedEvent AreaDeleted = 19;
+        PermitJoinChangedEvent PermitJoinChanged = 20;
+        BindingEnableChangedEvent BindingEnableChanged = 21;
+        FirmwareUpgradeStatusChangedEvent FirmwareUpgradeStatusChanged = 22;
+        UpdateRecommendFirmwareEvent UpdateRecommendFirmware = 23;
+        FirmwareAvailableEvent FirmwareAvailable = 24;
+        DeviceAddedEvent DeviceAdded = 25;
+        DeviceAssociationEvent DeviceAssociation = 26;
+        PresenceEvent Presence = 27;
+        DeviceDeletedEvent DeviceDeleted = 28;
+    }
+}
+
+message EntityAvailableEvent {
+    LiveEntity Entity = 1;
+}
+
+message PhysicDeviceOnlineEvent {
+    string UUID = 1;
+}
+
+message PhysicDeviceOfflineEvent {
+    string UUID = 1;
+    bool Gone = 2;
+    string Model = 3;
+    string Name = 4;
+    string HomeCenter = 5;
+}
+
+message DeviceKeyPressedEvent {
+    string UUID = 1;
+    int32 SEQ = 2;
+    int32 Times = 3;
+    DeviceProfile Profile = 4;
+    string Name = 5;
+    int32 RSSI = 6;
+    int32 AlertLevel = 7;
+}
+
+message DeviceAttrReportEvent {
+    string UUID = 1;
+    repeated Attribute Attributes = 2;
+    DeviceProfile Profile = 3;
+    string Name = 4;
+    int32 RSSI = 5;
+    int32 AlertLevel = 6;
+}
+
+message OnOffStatusChangedEvent {
+    string UUID = 1;
+    bool OnOff = 2;
+    string Causer = 3;
+}
+
+message SceneCreatedEvent {
+    string Causer = 1;
+    LiveEntity Scene = 2;
+}
+
+message SceneUpdatedEvent {
+    string Causer = 1;
+    LiveEntity Scene = 2;
+}
+
+message SceneDeletedEvent {
+    string UUID = 1;
+    string Causer = 2;
+}
+
+message BindingCreatedEvent {
+    string Causer = 1;
+    LiveEntity Binding = 2;
+}
+
+message BindingUpdatedEvent {
+    string Causer = 1;
+    LiveEntity Binding = 2;
+}
+
+message BindingDeletedEvent {
+    string UUID = 1;
+    string Causer = 2;
+}
+
+message EntityInfoConfiguredEvent {
+    string UUID = 1;
+    string Causer = 2;
+    string Name = 3;
+    bool IsNew = 4;
+    string AreaUUID = 5;
+}
+
+message AreaCreatedEvent {
+    LiveEntity Area = 1;
+    string Causer = 2;
+}
+
+message AreaRenamedEvent {
+    LiveEntity Area = 1;
+    string Causer = 2;
+}
+
+message AreaDeletedEvent {
+    string UUID = 1;
+    string Causer = 2;
+}
+
+message DeviceAddedEvent {
+    string UUID = 1;
+    string Causer = 2;
+}
+
+message PermitJoinChangedEvent {
+    string UUID = 1;
+    uint32 Duration = 2;
+    string Causer = 3;
+}
+
+message BindingEnableChangedEvent {
+    string UUID = 1;
+    bool Enabled = 2;
+    string Causer = 3;
+}
+
+message DeviceAssociationEvent {
+    string User = 1;
+    string By = 2;
+    string DeviceName = 3;
+    string DeviceUUID = 4;
+    AssociationAction Action = 5;
+    SubscriptionType Status = 6;
+    string UserDisplayName = 7;
+    string ByDisplayName = 8;
+}
+
+message FirmwareAvailableEvent {
+}
+
+enum UpgradeStatus {
+    UpgradeStarted = 0;
+    UpgradeOngoing = 1;
+    UpgradeFinished = 2;
+    UpgradeError = 3;
+}
+
+message FirmwareUpgradeStatusChangedEvent {
+    string DeviceUUID = 1;
+    string FirmwareUUID = 2;
+    string FirmwareVersion = 3;
+    UpgradeStatus Status = 4;
+    uint32 Percent = 5;
+    ErrorCode Code = 6;
+}
+
+message UpdateRecommendFirmwareEvent {
+    string FirmwareUUID = 1;
+    string DeviceUUID = 2;
+}
+
+message PresenceEvent {
+    string Username = 1;
+    bool Online = 2;
+    string Resource = 3;
+    string Name = 4;
+}
+
+message DeviceDeletedEvent {
+    string UUID = 1;
+    string Causer = 2;
+}

@@ -1,0 +1,55 @@
+diff --git a/packages/flutter/lib/src/cupertino/dialog.dart b/packages/flutter/lib/src/cupertino/dialog.dart
+index 0adee6f3e..01d67c9e2 100644
+--- a/packages/flutter/lib/src/cupertino/dialog.dart
++++ b/packages/flutter/lib/src/cupertino/dialog.dart
+@@ -74,12 +74,12 @@ const Color _kDialogColor = Color(0xC0FFFFFF);
+ 
+ // Translucent white that is painted on top of the blurred backdrop as the
+ // background color of a pressed button.
+-const Color _kDialogPressedColor = Color(0x90FFFFFF);
++const Color _kDialogPressedColor = Color(0xFFD4D4D4);
+ 
+ // Translucent white that is painted on top of the blurred backdrop in the
+ // gap areas between the content section and actions section, as well as between
+ // buttons.
+-const Color _kButtonDividerColor = Color(0x40FFFFFF);
++const Color _kButtonDividerColor = Color(0xFFD4D4D4);
+ 
+ // The alert dialog layout policy changes depending on whether the user is using
+ // a "regular" font size vs a "large" font size. This is a spectrum. There are
+diff --git a/packages/flutter/lib/src/widgets/navigator.dart b/packages/flutter/lib/src/widgets/navigator.dart
+index edf913e81..9ad46c17a 100644
+--- a/packages/flutter/lib/src/widgets/navigator.dart
++++ b/packages/flutter/lib/src/widgets/navigator.dart
+@@ -1472,6 +1472,9 @@ class NavigatorState extends State<Navigator> with TickerProviderStateMixin {
+ 
+   final List<OverlayEntry> _initialOverlayEntries = <OverlayEntry>[];
+ 
++  //TODO: if conflict when upgrade, delete this two lines
++  List<Route<dynamic>> get history => _history;
++
+   @override
+   void initState() {
+     super.initState();
+diff --git a/packages/flutter/lib/src/widgets/text.dart b/packages/flutter/lib/src/widgets/text.dart
+index e3c7042d0..1f0275739 100644
+--- a/packages/flutter/lib/src/widgets/text.dart
++++ b/packages/flutter/lib/src/widgets/text.dart
+@@ -234,7 +234,7 @@ class Text extends StatelessWidget {
+     this.locale,
+     this.softWrap,
+     this.overflow,
+-    this.textScaleFactor,
++    this.textScaleFactor = 1.0,
+     this.maxLines,
+     this.semanticsLabel,
+   }) : assert(
+@@ -257,7 +257,7 @@ class Text extends StatelessWidget {
+     this.locale,
+     this.softWrap,
+     this.overflow,
+-    this.textScaleFactor,
++    this.textScaleFactor = 1.0,
+     this.maxLines,
+     this.semanticsLabel,
+   }) : assert(
